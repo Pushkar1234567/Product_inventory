@@ -1,0 +1,11 @@
+asgiref==3.7.2
+Django==3.2.16
+django-cors-headers==3.10.1
+djangorestframework==3.14.0
+psycopg2==2.9.7
+psycopg2-binary==2.9.5
+pytz==2023.3
+sqlparse==0.4.4
+typing-extensions==4.7.1
+twilio==7.15.0
+django-filter==21.1
