@@ -8,16 +8,17 @@ from rest_framework import status
 
 class CreateProduct(APIView):
 
+    # Get all the listed properties from the database
     def get(self, request):
         try:
-            products = Product.objects.all()
+            products = Product.objects.all() # Retrieve all products from the database
             serializer = ProductSerializer(products, many=True)
             return Response(serializer.data)
         except Exception as e:
             print("An error occurred:", e)
             return Response({"message": "An error occurred while processing your request"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-    
+    # Create the property
     def post(self, request):
         try:
             data = request.data
@@ -37,6 +38,7 @@ class CreateProduct(APIView):
 
 class ProductRetrieveUpdateDestroy(APIView):
 
+    # Retrieve a property by the id from the listed properties
     def get(self, request, pk):
         try:
             product = Product.objects.get(id=pk)
@@ -57,6 +59,7 @@ class ProductRetrieveUpdateDestroy(APIView):
             return Response({"message": "An error occurred while processing your request"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
 
+    # Update the property by the id from the listed properties
     def put(self, request, pk):
         try:
             product = Product.objects.get(id=pk)
@@ -82,10 +85,11 @@ class ProductRetrieveUpdateDestroy(APIView):
             return Response({"message": "An error occurred while processing your request"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
+    # Delete the property by id from the listed properties
     def delete(self, request, pk):
         try:
             product = Product.objects.get(id=pk)
-            if not product:
+            if not product: #if not able to find the product
                 response_data = {"message": "Product not found"}
                 response_status = status.HTTP_404_NOT_FOUND
                 return Response(response_data, status=response_status)
